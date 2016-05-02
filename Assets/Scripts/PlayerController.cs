@@ -6,15 +6,11 @@ public class PlayerController : MonoBehaviour {
 	public float speed;
 
 	private Rigidbody rb;
+	private int count;
 
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody> ();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
 	}
 
 	void FixedUpdate ()
@@ -25,6 +21,14 @@ public class PlayerController : MonoBehaviour {
 		Vector3 movement = new Vector3 (moveHorizontal, 0.0f, moveVertical);
 
 		rb.AddForce (movement * speed);
+	}
+
+	void OnTriggerEnter (Collider other) 
+	{
+		if (other.gameObject.CompareTag ("Pick Up")) 
+		{
+			other.gameObject.SetActive (false);
+		}
 	}
 			
 }
